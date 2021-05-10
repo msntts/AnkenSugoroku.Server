@@ -1,0 +1,37 @@
+version: '3'
+services:
+    anken_server_test_env:
+        image: python:3
+        container_name: anken_server_test_env
+        working_dir: /src
+        environment:
+            - http_proxy=${http_proxy}
+            - https_proxy=${https_proxy}
+            - HTTP_PROXY=${HTTP_PROXY}
+            - HTTPS_PROXY=${HTTPS_PROXY}
+        volumes:
+            - ../runtime/src/:/src
+            - ../../src/dist/project-board-game:/src/static/
+            # for using docker on WSL2. path must be Absolute path
+            #- C:\path\to\repo\AnkenSugoroku\docker\runtime\src:/src/
+            #- C:\path\to\repo\AnkenSugoroku\src\dist\project-board-game:/src/static/
+        command: ["bash", "startup.sh"]
+
+    anken_test_env:
+        image: python:3
+        depends_on: 
+            - anken_server_test_env
+        container_name: anken_server_tester
+        working_dir: /src
+        environment:
+            - http_proxy=${http_proxy}
+            - https_proxy=${https_proxy}
+            - HTTP_PROXY=${HTTP_PROXY}
+            - HTTPS_PROXY=${HTTPS_PROXY}
+            - TEST_TARGET_HOST=anken_server_test_env:5000
+        tty: true
+        volumes:
+            - ./src:/src
+            # for using docker on WSL2. path must be Absolute path
+            #- C:\path\to\repo\AnkenSugoroku\docker\runtime\src:/src/
+        command: ["bash", "startup.sh"]

@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  ankendev:
+    image: node:latest
+    container_name: ankendev
+    tty: true
+    volumes:
+      - ../../src:/src
+      - ./set-proxy.sh:/tmp/set-proxy.sh
+    environment:
+      - http_proxy=${http_proxy}
+      - https_proxy=${https_proxy}
+      - HTTP_PROXY=${HTTP_PROXY}
+      - HTTPS_PROXY=${HTTPS_PROXY}
+      - NODE_ENV=development
+      - PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/src/node_modules/.bin/
+    working_dir: /src
+    network_mode: host
