@@ -2,7 +2,7 @@ version: '3'
 
 services:
   ankendev:
-    image: node:latest
+    image: node:14
     container_name: ankendev
     tty: true
     volumes:
