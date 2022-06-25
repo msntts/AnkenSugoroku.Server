@@ -1,0 +1,82 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: 案件すごろくAPI
+paths:
+  /pieces/:
+    get:
+      summary: 全ての駒情報の取得
+      operationId: listPieces
+      tags:
+        - pieces
+      responses:
+        '200':
+          description: 駒情報の配列
+          content:
+            application/json:    
+              schema:
+                $ref: "#/components/schemas/PiecesInfo"
+    post:
+      summary: 駒を新規作成する
+      operationId: createPiece
+      tags:
+        - pieces
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PieceModifyCommand"
+      responses:
+        '201':
+          description: 作成された駒の情報
+          content:
+            application/json:    
+              schema:
+                $ref: "#/components/schemas/PieceInfo"
+        '400':
+          description: 駒の新規作成失敗
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PieceCreationError"
+components:
+  schemas:
+    PiecesInfo:
+      type: array
+      items:
+        $ref: "#/components/schemas/PieceInfo"
+    PieceInfo:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        position:
+          type: integer
+        url_img_project:
+          type: string
+        url_img_skill:
+          type: string
+    PieceModifyCommand:
+      type: object
+      required:
+        - name
+        - url_img_project
+        - url_img_skill
+      properties:
+        name:
+          type: string
+        url_img_project:
+          type: string
+        url_img_skill:
+          type: string    
+    PieceCreationError:
+      type: object
+      properties:
+        message:
+          type: string
+          description: エラー詳細
+        payload:
+          type: object
+          $ref: "#/components/schemas/PieceModifyCommand"
