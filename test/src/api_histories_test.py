@@ -49,7 +49,7 @@ class HistoriesTest(unittest.TestCase):
         2. 駒の履歴が表示されること
         """
         # 駒の作成
-        payload = {'name': 'history', 'url_img_project': 'anken.png', 'url_img_skill': 'skill.jpg'}
+        payload = {'name': 'history', 'url_img_project': 'project-images/anken.png', 'url_img_skill': 'skill-images/skill.jpg'}
         response = requests.post(f'http://{HistoriesTest.HOST}/pieces/', data = json.dumps(payload))
 
         if response.status_code == 201:

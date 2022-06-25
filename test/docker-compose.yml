@@ -10,11 +10,7 @@ services:
             - HTTP_PROXY=${HTTP_PROXY}
             - HTTPS_PROXY=${HTTPS_PROXY}
         volumes:
-            - ../runtime/src/:/src
-            - ../../src/dist/project-board-game:/src/static/
-            # for using docker on WSL2. path must be Absolute path
-            #- C:\path\to\repo\AnkenSugoroku\docker\runtime\src:/src/
-            #- C:\path\to\repo\AnkenSugoroku\src\dist\project-board-game:/src/static/
+            - ../src/:/src
         command: ["bash", "startup.sh"]
 
     anken_test_env:
@@ -32,6 +28,4 @@ services:
         tty: true
         volumes:
             - ./src:/src
-            # for using docker on WSL2. path must be Absolute path
-            #- C:\path\to\repo\AnkenSugoroku\docker\runtime\src:/src/
         command: ["bash", "startup.sh"]

@@ -103,7 +103,7 @@ class PieceTest(unittest.TestCase):
         3. 駒の位置が初期位置になっていること
         4. 作成した駒が駒リストに表示されること
         """
-        payload = {'name': 'test', 'url_img_project': 'anken.png', 'url_img_skill': 'skill.jpg'}
+        payload = {'name': 'test', 'url_img_project': 'project-images/anken.png', 'url_img_skill': 'skill-images/skill.jpg'}
         response = requests.post(f'http://{PieceTest.HOST}/pieces/', data = json.dumps(payload))
         self.assertEqual(response.status_code, 201, response.json()) # 1
 
