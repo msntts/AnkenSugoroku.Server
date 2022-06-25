@@ -12,10 +12,7 @@ services:
             - HTTPS_PROXY=${HTTPS_PROXY}
         volumes:
             - ./src:/src
-            - ../../src/dist/project-board-game:/src/static/
-            # for using docker on WSL2. path must be Absolute path
-            #- C:\path\to\repo\AnkenSugoroku\docker\runtime\src:/src/
-            #- C:\path\to\repo\AnkenSugoroku\src\dist\project-board-game:/src/static/
+#           - path/to/AnkenSugoroku/web/resources:/src/static/
             - anken_data:/var/ankenSugoroku/
         ports:
             - "8080:5000"
